@@ -3,7 +3,7 @@ Description=RestAPI
 
 [Service]
 WorkingDirectory=/srv/RestAPI
-ExecStart=/usr/bin/dotnet /srv/RestAPI/AspNetSite
+ExecStart=/usr/bin/dotnet /srv/RestAPI/backend.dll
 SyslogIdentifier=RestAPI
 User=root
 Restart=always             
