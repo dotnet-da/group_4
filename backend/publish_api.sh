@@ -1,0 +1,1 @@
+﻿dotnet publish -c Release -o /srv/RestAPI/
