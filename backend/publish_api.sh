@@ -1,1 +1,2 @@
-﻿dotnet publish -c Release -o /srv/RestAPI/
+﻿#!/bin/bash
+dotnet publish -c Release -o /srv/RestAPI/
