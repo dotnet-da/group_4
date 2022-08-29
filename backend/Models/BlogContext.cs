@@ -11,7 +11,9 @@ namespace backend.Models
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=db0f91pe.mariadb.hosting.zone;database=db0f91pe;user=db0f91pe_x81cegh;password=63V+qe-Bdf");
+            //optionsBuilder.UseMySQL("server=db0f91pe.mariadb.hosting.zone;database=db0f91pe;user=db0f91pe_x81cegh;password=63V+qe-Bdf");
+            //optionsBuilder.UseMySQL("server=db0f91pe.mariadb.hosting.zone;database=db0f91pe;user=db0f91pe_x81cegh;password=63V+qe-Bdf");
+            optionsBuilder.UseMySQL("server=db0f91pe.mariadb.hosting.zone;database=db0f91pe;user=db0f91pe_hfzgtta;password=aJ23qhKEcaV3B3A");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
