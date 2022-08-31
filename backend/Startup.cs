@@ -25,6 +25,10 @@ namespace backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+            configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -32,15 +36,13 @@ namespace backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BlogContext>();
+            services.AddDbContext<BlogContext>(optionsAction => optionsAction.UseMySQL(Configuration.GetConnectionString("database_000")));
             services.AddScoped<BlogContext>();
-            
-            services.AddControllers();
-        }
 
-        private void OptionsAction(DbContextOptionsBuilder optionsAction)
-        {
-            optionsAction.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddDbContext<ToolContext>(optionsAction => optionsAction.UseMySQL(Configuration.GetConnectionString("database_001")));
+            services.AddScoped<ToolContext>();
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +64,13 @@ namespace backend
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
+            var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var serviceScope = serviceScopeFactory.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetService<ToolContext>();
+                dbContext.Database.EnsureCreated();
+            }
         }
     }
 }
