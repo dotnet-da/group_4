@@ -68,8 +68,14 @@ namespace backend
             var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (var serviceScope = serviceScopeFactory.CreateScope())
             {
-                var dbContext = serviceScope.ServiceProvider.GetService<ToolContext>();
-                dbContext.Database.EnsureCreated();
+                var toolContext = serviceScope.ServiceProvider.GetService<ToolContext>();
+                var blogContext = serviceScope.ServiceProvider.GetService<BlogContext>();
+                
+                //blogContext.Database.EnsureDeleted();
+                blogContext.Database.EnsureCreated();
+                
+                //toolContext.Database.EnsureDeleted();
+                toolContext.Database.EnsureCreated();
             }
         }
     }

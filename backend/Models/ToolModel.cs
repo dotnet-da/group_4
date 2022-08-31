@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,24 +15,30 @@ namespace backend.Models
         {
             public Player()
             {
-                Entries = new HashSet<Entry>();
+                Collections = new HashSet<Collection>();
             }
 
             public int Id { get; set; }
             public string Name { get; set; }
 
-            public virtual ICollection<Entry> Entries { get; set; }
+            [JsonIgnore]
+            public virtual ICollection<Collection> Collections { get; set; }
         }
 
         public partial class Entry
         {
-            public int Id { get; set; }
+            [JsonPropertyName("collection_id")]
+            public int CollectionId { get; set; }
+            
+            [JsonPropertyName("type_id")]
             public int TypeId { get; set; }
-            public int PlayerId { get; set; }
+
             public int? Value { get; set; }
 
-            public virtual Player PlayerNavigation { get; set; }
+            [JsonIgnore]
             public virtual Type TypeNavigation { get; set; }
+            [JsonIgnore]
+            public virtual Collection CollectionNavigation { get; set; }
         }
 
         public partial class Type
@@ -43,7 +50,30 @@ namespace backend.Models
 
             public int Id { get; set; }
             public string Identifier { get; set; }
+            public string Description { get; set; }
 
+            [JsonIgnore]
+            public virtual ICollection<Entry> Entries { get; set; }
+        }
+        
+        public partial class Collection
+        {
+            public Collection()
+            {
+                Entries = new HashSet<Entry>();
+            }
+
+            public int Id { get; set; }
+            
+            [JsonPropertyName("player_id")]
+            public int PlayerId { get; set; }
+            [JsonPropertyName("created_at")]
+            public DateTime CreatedAt { get; set; }
+            
+            [JsonIgnore]
+            public virtual Player PlayerNavigation { get; set; }
+            
+            [JsonIgnore]
             public virtual ICollection<Entry> Entries { get; set; }
         }
     }
