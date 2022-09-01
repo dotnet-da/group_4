@@ -18,7 +18,9 @@ namespace backend.Models
                 Collections = new HashSet<Collection>();
             }
 
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             public int Id { get; set; }
+            [Required]
             public string Name { get; set; }
 
             [JsonIgnore]

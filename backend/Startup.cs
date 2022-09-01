@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend.Middleware;
 using backend.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -57,7 +58,7 @@ namespace backend
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseMiddleware<ApiKeyMiddleware>();
             app.UseRouting();
             
             app.UseAuthentication();
