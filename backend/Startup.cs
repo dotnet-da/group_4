@@ -23,6 +23,10 @@ namespace backend
 {
     public class Startup
     {
+        ///<summary>
+        ///Constructor 
+        ///</summary>
+        /// <param name="configuration">Selected configuration</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,7 +38,7 @@ namespace backend
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        ///<summary> This method gets called by the runtime. Use this method to add services to the container.</summary>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BlogContext>(optionsAction => optionsAction.UseMySQL(Configuration.GetConnectionString("database_000")));
@@ -46,7 +50,7 @@ namespace backend
             services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        ///<summary> This method gets called by the runtime. Use this method to configure the HTTP request pipeline. </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseForwardedHeaders(new ForwardedHeadersOptions
