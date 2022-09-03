@@ -1,0 +1,5 @@
+backend/bin
+backend/obj
+frontend/bin
+frontend/obj
+*.sln
