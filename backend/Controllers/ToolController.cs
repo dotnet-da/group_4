@@ -6,6 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace backend.Controllers
 {
+    ///<summary>
+    /// This class is the API-Controller for the Tool section system.
+    ///</summary>
     [ApiController]
     [Route("[controller]")]
     public class ToolController : ControllerBase
@@ -13,6 +16,9 @@ namespace backend.Controllers
         private readonly ILogger<ToolController> _logger;
         private readonly ToolContext _context;
 
+        ///<summary>
+        /// Basic Constructor
+        ///</summary>
         public ToolController(ILogger<ToolController> logger, ToolContext context)
         {
             _logger = logger;
@@ -20,6 +26,354 @@ namespace backend.Controllers
         }
 
         #region Player
+
+        ///<summary>
+        /// GET Request to return a player by its name or its id
+        ///</summary>
+        [HttpGet]
+        [Route("player", Name = "get_player")]
+        public IActionResult GetPlayer(int? id, string name)
+        {
+            if (!id.HasValue && string.IsNullOrEmpty(name))
+            {
+                var result = _context.Players;
+                return Ok(result);
+            }
+
+            if (id.HasValue)
+            {
+                try
+                {
+                    var result = _context.Players.FirstOrDefault(player => player.Id == id);
+                    if (result == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                try
+                {
+                    var result = _context.Players.FirstOrDefault(player => player.Name == name);
+                    if (result == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+
+            return BadRequest();
+        }
+
+
+        ///<summary>
+        /// POST Request to create a new player
+        ///</summary>
+        [HttpPost]
+        [Route("player", Name = "create_player")]
+        public IActionResult CreatePlayer([FromQuery] string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var entity = new ToolModel.Player()
+                {
+                    Name = name
+                };
+                _context.Players.Add(entity);
+                _context.SaveChanges();
+                return CreatedAtRoute("get_player", new { id = entity.Id }, entity);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        #endregion
+
+        #region Type
+
+        ///<summary>
+        /// GET Request to create new entry-type
+        ///</summary>
+        [HttpGet]
+        [Route("type", Name = "get_type")]
+        public IActionResult GetType(int? id, string identifier)
+        {
+            if (!id.HasValue && string.IsNullOrEmpty(identifier))
+            {
+                var result = _context.Types;
+                return Ok(result);
+            }
+
+            if (id.HasValue)
+            {
+                try
+                {
+                    var result = _context.Types.FirstOrDefault(type => type.Id == id);
+                    if (result == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(identifier))
+            {
+                try
+                {
+                    var result = _context.Types.FirstOrDefault(type => type.Identifier == identifier);
+                    if (result == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+
+            return BadRequest();
+        }
+
+        ///<summary>
+        /// POST Request to create a new entry-type
+        ///</summary>
+        [HttpPost]
+        [Route("type", Name = "create_type")]
+        public IActionResult CreateType(string identifier)
+        {
+            if (string.IsNullOrEmpty(identifier))
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var entity = new ToolModel.Type()
+                {
+                    Identifier = identifier
+                };
+                _context.Types.Add(entity);
+                _context.SaveChanges();
+                return CreatedAtRoute("get_type", new { id = entity.Id }, entity);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        #endregion
+
+        #region Entry
+
+        ///<summary>
+        /// GET Request to return a entry. 
+        /// The CollectionID and the EntryID is requiered
+        ///</summary>
+        [HttpGet]
+        [Route("entry", Name = "get_entry")]
+        public IActionResult GetEntry(int? cid, int? tid)
+        {
+            if (!cid.HasValue)
+            {
+                if (!tid.HasValue)
+                {
+                    var result = _context.Entries;
+                    return Ok(result);
+                }
+                else
+                {
+                    var result = _context.Entries.Where(entry => entry.TypeId == tid.Value);
+                    return Ok(result);
+                }
+            }
+
+            try
+            {
+                if (!tid.HasValue)
+                {
+                    var result = _context.Entries.Where(entry => entry.CollectionId == cid);
+                    if (!result.Any())
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+                else
+                {
+                    var result = _context.Entries.Where(entry => entry.CollectionId == cid)
+                        .Where(entry => entry.TypeId == tid);
+                    if (!result.Any())
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        ///<summary>
+        /// POST Requerst to create a new entry.
+        /// Required is the collection id, the entry id and the value for that entry.
+        ///</summary>
+        [HttpPost]
+        [Route("entry", Name = "create_entry")]
+        public IActionResult CreateEntry(int? cid, int? tid, int? value)
+        {
+            if (!cid.HasValue)
+            {
+                return BadRequest();
+            }
+
+            if (!tid.HasValue)
+            {
+                return BadRequest();
+            }
+
+            if (!value.HasValue)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var entity = new ToolModel.Entry()
+                {
+                    CollectionId = cid.Value,
+                    TypeId = tid.Value,
+                    Value = value.Value
+                };
+                _context.Entries.Add(entity);
+                _context.SaveChanges();
+
+                return CreatedAtRoute("get_entry", new { cid = entity.CollectionId, tid = entity.TypeId }, entity);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        #endregion
+
+        #region Collection
+
+        ///<summary>
+        /// GET Request to return a collection. 
+        /// The collectionID and the playerID of the player linked to the collection is required.
+        ///</summary>
+        [HttpGet]
+        [Route("collection", Name = "get_collection")]
+        public IActionResult GetCollection(int? id, int? pid)
+        {
+            try
+            {
+                if (!id.HasValue && !pid.HasValue)
+                {
+                    var result = _context.Collections;
+                    return Ok(result);
+                }
+
+                if (id.HasValue)
+                {
+                    var result = _context.Collections.Where(collection => collection.Id == id.Value);
+                    if (!result.Any())
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+
+                if (pid.HasValue)
+                {
+                    var result = _context.Collections.Where(collection => collection.PlayerId == pid.Value);
+                    if (!result.Any())
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+            return BadRequest();
+        }
+        
+        /// <summary>
+        /// POST Request to create a new Collection
+        /// The id of the player which is creating the collection is required (the timestamp of the collection will be set automaticly)
+        /// </summay>
+        [HttpPost]
+        [Route("collection", Name = "create_collection")]
+        public IActionResult CreateCollection(int? pid)
+        {
+            if (!pid.HasValue)
+            {
+                return BadRequest(); 
+            }
+            
+            try
+            {
+                var entity = new ToolModel.Collection()
+                {
+                    PlayerId = pid.Value
+                };
+                _context.Collections.Add(entity);
+                _context.SaveChanges();
+                return CreatedAtRoute("get_collection", new { id = entity.Id }, entity);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        #endregion
+
+        ///CURRENTLY NOT IN USE
+
+        ///Player
 
         /*[HttpGet]
         [Route("player")]
@@ -80,83 +434,13 @@ namespace backend.Controllers
             return string.IsNullOrEmpty(name) ? GetPlayer(name) : GetAllPlayers();
         }*/
 
-        [HttpGet]
-        [Route("player", Name = "get_player")]
-        public IActionResult GetPlayer(int? id, string name)
-        {
-            if (!id.HasValue && string.IsNullOrEmpty(name))
-            {
-                var result = _context.Players;
-                return Ok(result);
-            }
 
-            if (id.HasValue)
-            {
-                try
-                {
-                    var result = _context.Players.FirstOrDefault(player => player.Id == id);
-                    if (result == null)
-                    {
-                        return NotFound();
-                    }
 
-                    return Ok(result);
-                }
-                catch
-                {
-                    return BadRequest();
-                }
-            }
+        ///TYPE
 
-            if (!string.IsNullOrEmpty(name))
-            {
-                try
-                {
-                    var result = _context.Players.FirstOrDefault(player => player.Name == name);
-                    if (result == null)
-                    {
-                        return NotFound();
-                    }
 
-                    return Ok(result);
-                }
-                catch
-                {
-                    return BadRequest();
-                }
-            }
 
-            return BadRequest();
-        }
 
-        [HttpPost]
-        [Route("player", Name = "create_player")]
-        public IActionResult CreatePlayer([FromQuery] string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                var entity = new ToolModel.Player()
-                {
-                    Name = name
-                };
-                _context.Players.Add(entity);
-                _context.SaveChanges();
-                return CreatedAtRoute("get_player", new { id = entity.Id }, entity);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        #endregion
-
-        #region Type
 
         /*[HttpGet]
         [Route("type")]
@@ -185,83 +469,12 @@ namespace backend.Controllers
             }
         }*/
 
-        [HttpGet]
-        [Route("type", Name = "get_type")]
-        public IActionResult GetType(int? id, string identifier)
-        {
-            if (!id.HasValue && string.IsNullOrEmpty(identifier))
-            {
-                var result = _context.Types;
-                return Ok(result);
-            }
 
-            if (id.HasValue)
-            {
-                try
-                {
-                    var result = _context.Types.FirstOrDefault(type => type.Id == id);
-                    if (result == null)
-                    {
-                        return NotFound();
-                    }
 
-                    return Ok(result);
-                }
-                catch
-                {
-                    return BadRequest();
-                }
-            }
+        ///ENTRY
 
-            if (!string.IsNullOrEmpty(identifier))
-            {
-                try
-                {
-                    var result = _context.Types.FirstOrDefault(type => type.Identifier == identifier);
-                    if (result == null)
-                    {
-                        return NotFound();
-                    }
 
-                    return Ok(result);
-                }
-                catch
-                {
-                    return BadRequest();
-                }
-            }
 
-            return BadRequest();
-        }
-
-        [HttpPost]
-        [Route("type", Name = "create_type")]
-        public IActionResult CreateType(string identifier)
-        {
-            if (string.IsNullOrEmpty(identifier))
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                var entity = new ToolModel.Type()
-                {
-                    Identifier = identifier
-                };
-                _context.Types.Add(entity);
-                _context.SaveChanges();
-                return CreatedAtRoute("get_type", new { id = entity.Id }, entity);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        #endregion
-
-        #region Entry
 
         /*[HttpGet]
         [Route("entry")]
@@ -337,95 +550,11 @@ namespace backend.Controllers
             }
         }*/
 
-        [HttpGet]
-        [Route("entry", Name = "get_entry")]
-        public IActionResult GetEntry(int? cid, int? tid)
-        {
-            if (!cid.HasValue)
-            {
-                if (!tid.HasValue)
-                {
-                    var result = _context.Entries;
-                    return Ok(result);
-                }
-                else
-                {
-                    var result = _context.Entries.Where(entry => entry.TypeId == tid.Value);
-                    return Ok(result);
-                }
-            }
 
-            try
-            {
-                if (!tid.HasValue)
-                {
-                    var result = _context.Entries.Where(entry => entry.CollectionId == cid);
-                    if (!result.Any())
-                    {
-                        return NotFound();
-                    }
 
-                    return Ok(result);
-                }
-                else
-                {
-                    var result = _context.Entries.Where(entry => entry.CollectionId == cid)
-                        .Where(entry => entry.TypeId == tid);
-                    if (!result.Any())
-                    {
-                        return NotFound();
-                    }
+        ///COLLECTION
 
-                    return Ok(result);
-                }
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
 
-        [HttpPost]
-        [Route("entry", Name = "create_entry")]
-        public IActionResult CreateEntry(int? cid, int? tid, int? value)
-        {
-            if (!cid.HasValue)
-            {
-                return BadRequest();
-            }
-
-            if (!tid.HasValue)
-            {
-                return BadRequest();
-            }
-
-            if (!value.HasValue)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                var entity = new ToolModel.Entry()
-                {
-                    CollectionId = cid.Value,
-                    TypeId = tid.Value,
-                    Value = value.Value
-                };
-                _context.Entries.Add(entity);
-                _context.SaveChanges();
-
-                return CreatedAtRoute("get_entry", new { cid = entity.CollectionId, tid = entity.TypeId }, entity);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        #endregion
-
-        #region Collection
 
         /*[HttpGet]
         [Route("collection")]
@@ -474,74 +603,5 @@ namespace backend.Controllers
                 return BadRequest();
             }
         }*/
-
-        [HttpGet]
-        [Route("collection", Name = "get_collection")]
-        public IActionResult GetCollection(int? id, int? pid)
-        {
-            try
-            {
-                if (!id.HasValue && !pid.HasValue)
-                {
-                    var result = _context.Collections;
-                    return Ok(result);
-                }
-
-                if (id.HasValue)
-                {
-                    var result = _context.Collections.Where(collection => collection.Id == id.Value);
-                    if (!result.Any())
-                    {
-                        return NotFound();
-                    }
-
-                    return Ok(result);
-                }
-
-                if (pid.HasValue)
-                {
-                    var result = _context.Collections.Where(collection => collection.PlayerId == pid.Value);
-                    if (!result.Any())
-                    {
-                        return NotFound();
-                    }
-
-                    return Ok(result);
-                }
-            }
-            catch
-            {
-                return BadRequest();
-            }
-
-            return BadRequest();
-        }
-        
-        [HttpPost]
-        [Route("collection", Name = "create_collection")]
-        public IActionResult CreateCollection(int? pid)
-        {
-            if (!pid.HasValue)
-            {
-                return BadRequest(); 
-            }
-            
-            try
-            {
-                var entity = new ToolModel.Collection()
-                {
-                    PlayerId = pid.Value
-                };
-                _context.Collections.Add(entity);
-                _context.SaveChanges();
-                return CreatedAtRoute("get_collection", new { id = entity.Id }, entity);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        #endregion
     }
 }

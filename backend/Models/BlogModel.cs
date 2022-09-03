@@ -6,8 +6,15 @@ using MySql.EntityFrameworkCore.DataAnnotations;
 
 namespace backend.Models
 {
+    ///<summary>
+    /// This class stores subclasses related to the Blog-section of the database
+    ///</summary>
     public class BlogModel
     {
+        ///<summary>
+        /// This class represents a blog post on the database. 
+        /// It consists of a title and a content, and is also linked to an author, which is a user
+        ///</summary>
         [Table("blog_posts")]
         public class Post
         {
@@ -27,6 +34,10 @@ namespace backend.Models
             public virtual User Author { get; set; }
         }
         
+        ///<summary>
+        /// This class represents a user on the database. 
+        /// It consist of a name and every Post it created
+        ///</summary>
         [Table("blog_users")]
         public class User
         {

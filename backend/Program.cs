@@ -22,6 +22,9 @@ namespace backend
             CreateHostBuilder(args).Build().Run();
         }
         
+        ///<summary>
+        ///Inserts tests data into the database
+        ///</summary>
         private static void InsertData()
         {
             using(var context = new BlogContext())
@@ -55,6 +58,9 @@ namespace backend
             }
         }
         
+        ///<summary>
+        ///Prints out every user and every blog post
+        ///</summary>
         private static void PrintData()
         {
             // Gets and prints all books in database
@@ -100,6 +106,9 @@ namespace backend
             }
         }
 
+        ///<summary>
+        ///Creates a Host Builder 
+        ///</summary>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
