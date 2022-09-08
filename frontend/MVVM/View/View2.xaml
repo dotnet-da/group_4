@@ -6,7 +6,41 @@
              xmlns:local="clr-namespace:frontend.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Gray">
-        <TextBlock Text="ZWEITE VIEW IHR PISSER" />
-    </Grid>
+    <ScrollViewer>
+        <ItemsControl Name="ItemsControl">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="15, 5, 5, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontFamily="/Assets/Fonts/#Kodchasan"
+                                            FontSize="28"
+                                            Foreground="{StaticResource Orange}"
+                                            Text="{Binding Title}" />
+                        <TextBlock Grid.Column="1" TextAlignment="Right"
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="/Assets/Fonts/#Kodchasan"
+                                                   FontSize="16"
+                                                   Foreground="{StaticResource AccentOrange}"
+                                                   Text="{Binding Author.Name}" />
+                        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
+                                                   VerticalAlignment="Center"
+                                                   TextWrapping="Wrap"
+                                                   FontFamily="/Assets/Fonts/#Kodchasan"
+                                                   FontSize="12"
+                                                   Foreground="White"
+                                                   Text="{Binding Content}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
 </UserControl>

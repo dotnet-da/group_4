@@ -13,12 +13,12 @@ namespace frontend
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new View1ViewModel();
+            DataContext = new PlayerViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new View1ViewModel();
+            DataContext = new PlayerViewModel();
         }
 
         private void btnView2_Click(object sender, RoutedEventArgs e)

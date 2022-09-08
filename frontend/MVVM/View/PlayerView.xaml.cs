@@ -1,4 +1,5 @@
-﻿using System;
+﻿using frontend.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,13 @@ namespace frontend.MVVM.View
     /// <summary>
     /// Interaktionslogik für View1.xaml
     /// </summary>
-    public partial class View1 : UserControl
+    public partial class PlayerView : UserControl
     {
-        public View1()
+        public PlayerView()
         {
             InitializeComponent();
+            this.DataContext = new PlayerViewModel();
+
         }
     }
 }

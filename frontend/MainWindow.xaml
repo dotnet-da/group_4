@@ -11,10 +11,12 @@
     <Window.DataContext>
         <viewmodels:MainViewModel/>
     </Window.DataContext>
+
     
+
     <Window.Resources>
-        <DataTemplate x:Name="View1Template" DataType="{x:Type viewmodels:View1ViewModel}">
-            <views:View1 DataContext="{Binding}"/>
+        <DataTemplate x:Name="PlayerViewTemplate" DataType="{x:Type viewmodels:PlayerViewModel}">
+            <views:PlayerView DataContext="{Binding}"/>
         </DataTemplate>
         <DataTemplate x:Name="View2Template" DataType="{x:Type viewmodels:View2ViewModel}">
             <views:View2 DataContext="{Binding}"/>
@@ -37,7 +39,7 @@
 
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Background="Gray">
             <StackPanel>
-                <Button x:Name="btnView1" Content="View 1" Click="Button_Click"/>
+                <Button x:Name="btnView1" Content="Player" Click="Button_Click"/>
                 <Button x:Name="btnView2" Content="View 2" Click="btnView2_Click"/>
             </StackPanel>
         </DockPanel>
