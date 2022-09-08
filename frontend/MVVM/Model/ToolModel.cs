@@ -33,7 +33,7 @@ public class ToolModel
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("identfier")]
+        [JsonPropertyName("identifier")]
         public string Identifier { get; set; }
 
         [JsonPropertyName("description")]

@@ -37,6 +37,7 @@ namespace frontend.MVVM.View
                 var postCollection = JsonSerializer.Deserialize<List<ToolModel.Type>>(resultPosts);
 
                 //postCollection.ForEach(i => Console.WriteLine(i.Name));
+                postCollection.ForEach(i => Console.WriteLine(i.Identifier));
 
                 ItemsControl.ItemsSource = postCollection;
             }

@@ -5,6 +5,9 @@
     <Compile Update="MVVM\View\AddPlayerView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MVVM\View\AddTypeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\View\PlayerView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -17,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="MVVM\View\AddPlayerView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\AddTypeView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MVVM\View\PlayerView.xaml">
