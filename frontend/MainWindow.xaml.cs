@@ -22,9 +22,10 @@ namespace frontend
             DataContext = viewModel;
         }
 
-        private void btnView2_Click(object sender, RoutedEventArgs e)
+        private void btnType_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new View2ViewModel();
+            var viewModel = new ToolTypeViewModel();
+            DataContext = viewModel;
         }
     }
 }

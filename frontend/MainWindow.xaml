@@ -19,6 +19,9 @@
         <DataTemplate x:Name="View2Template" DataType="{x:Type viewmodels:View2ViewModel}">
             <views:View2 DataContext="{Binding}"/>
         </DataTemplate>
+        <DataTemplate x:Name="TypeViewTemplate" DataType="{x:Type viewmodels:ToolTypeViewModel}">
+            <views:ToolTypeView DataContext="{Binding}"/>
+        </DataTemplate>
     </Window.Resources>
     
     <Grid>
@@ -39,7 +42,7 @@
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Background="Gray">
             <StackPanel>
                 <Button x:Name="btnView1" Content="Player" Click="Button_Click"/>
-                <Button x:Name="btnView2" Content="View 2" Click="btnView2_Click"/>
+                <Button x:Name="btnType" Content="View 2" Click="btnType_Click"/>
             </StackPanel>
         </DockPanel>
 

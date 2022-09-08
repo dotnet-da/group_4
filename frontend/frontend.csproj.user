@@ -8,10 +8,10 @@
     <Compile Update="MVVM\View\PlayerView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\View2.xaml.cs">
+    <Compile Update="MVVM\View\ToolTypeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MVVM\View\View3.xaml.cs">
+    <Compile Update="MVVM\View\View2.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -22,10 +22,10 @@
     <Page Update="MVVM\View\PlayerView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\View2.xaml">
+    <Page Update="MVVM\View\ToolTypeView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MVVM\View\View3.xaml">
+    <Page Update="MVVM\View\View2.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
