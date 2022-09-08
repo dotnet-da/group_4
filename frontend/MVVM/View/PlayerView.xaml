@@ -22,11 +22,34 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Button x:Name="BtnAddPlayer" Grid.Column="3" Grid.ColumnSpan="1" Command="{Binding OpenAddPlayerCommand}" Grid.Row="1" Content="+"/>
-    <ScrollViewer Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2">
-        <StackPanel>
-                
-        </StackPanel>
-    </ScrollViewer>
+        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+            <ItemsControl Name="ItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="15, 5, 5, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontFamily="/Assets/Fonts/#Kodchasan"
+                                            FontSize="28"
+                                            Text="{Binding Id}" />
+                            <TextBlock Grid.Column="1" TextAlignment="Right"
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="/Assets/Fonts/#Kodchasan"
+                                                   FontSize="16"
+                                                   Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
     
 </UserControl>
