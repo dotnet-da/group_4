@@ -25,7 +25,6 @@ namespace frontend.MVVM.View
         {
             InitializeComponent();
             this.DataContext = new PlayerViewModel();
-
         }
     }
 }

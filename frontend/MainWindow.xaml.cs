@@ -18,7 +18,8 @@ namespace frontend
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new PlayerViewModel();
+            var viewModel = new PlayerViewModel();
+            DataContext = viewModel;
         }
 
         private void btnView2_Click(object sender, RoutedEventArgs e)
