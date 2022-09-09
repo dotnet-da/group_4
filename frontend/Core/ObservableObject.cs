@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace WpfApp4.Core;
+namespace frontend.Core;
 
 public class ObservableObject : INotifyPropertyChanged
 {

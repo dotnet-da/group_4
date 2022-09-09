@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using WpfApp4.Core;
+using frontend.Core;
 
 namespace frontend.MVVM.Model;
 

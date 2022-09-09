@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace frontend
 {
@@ -33,5 +34,43 @@ namespace frontend
             var viewModel = new CollectionViewModel();
             DataContext = viewModel;
         }
+
+        private void EntryViewMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var viewModel = new EntryListViewModel();
+            DataContext = viewModel;
+        }
+        
+        private void TopBar_Down(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
+
+        private void Close_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+
+        private void Maximise_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.MainWindow!.WindowState != WindowState.Maximized)
+            {
+                Application.Current.MainWindow!.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                Application.Current.MainWindow!.WindowState = WindowState.Normal;
+            }
+        }
+
+        private void Minimise_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow!.WindowState = WindowState.Minimized;
+        }
+        
     }
 }
