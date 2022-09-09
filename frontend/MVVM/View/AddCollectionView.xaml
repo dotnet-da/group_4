@@ -4,9 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:frontend.MVVM.View"
+        xmlns:viewmodels="clr-namespace:frontend.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="AddCollection" Height="450" Width="800">
+        Title="AddCollection" Height="200" Width="300">
+    <Window.DataContext>
+        <viewmodels:AddCollectionViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Column="2" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" Text="{Binding PlayerID}" VerticalAlignment="Center" Width="120"/>
+        <Label Grid.Column="1" Content="Player ID" HorizontalAlignment="Left" Margin="54,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
+        <Button Grid.Column="2" Content="Add" Grid.Row="3" Margin="5" Click="Button_Click" Command="{Binding AddCollectionCommand}"/>
+        <Button Grid.Column="1" Content="Cancel" Grid.Row="3" Margin="5" Click="Button_Click"/>
+
+
     </Grid>
 </Window>
