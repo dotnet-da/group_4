@@ -1,0 +1,33 @@
+﻿<Window x:Class="frontend.MVVM.View.AddType"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:frontend.MVVM.View"
+        xmlns:viewmodel="clr-namespace:frontend.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="AddType" Height="200" Width="200">
+    <Window.DataContext>
+        <viewmodel:AddTypeViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="93*"/>
+            <ColumnDefinition Width="93*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="1" Content="Cancel" Grid.Row="3" Margin="5,5,5,5" Click="Button_Click"/>
+        <Button Grid.Column="2" Content="Add" Grid.Row="3" Margin="5,5,5,5" Click="Button_Click" Command="{Binding AddPlayerCommand}"/>
+        <TextBox x:Name="txtIdentifier" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Identifier}" Width="120"/>
+        <TextBox x:Name="txtDescription" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Description}" Width="120"/>
+    </Grid>
+</Window>
