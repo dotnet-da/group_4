@@ -24,9 +24,17 @@ namespace frontend.MVVM.View
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Close_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void TopBar_Down(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
         }
     }
 }

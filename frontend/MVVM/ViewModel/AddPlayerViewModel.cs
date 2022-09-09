@@ -26,7 +26,7 @@ namespace frontend.MVVM.ViewModel
             {
                 try
                 {
-                    Name = AddPlayer().Result;
+                  await AddPlayer();
                 }
                 catch (Exception e)
                 {

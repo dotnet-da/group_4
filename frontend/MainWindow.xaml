@@ -114,10 +114,7 @@
                 </StackPanel>
                 <ContentControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Name="ContentControl"
                                 Content="{Binding}" />
-
             </Grid>
         </DockPanel>
     </Border>
-
-
 </Window>
