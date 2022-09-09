@@ -9,21 +9,21 @@
 
     <ItemGroup>
       <None Remove="Assets\Images\max_white.png" />
-      <Content Include="Assets\Images\max_white.png">
+      <Resource Include="Assets\Images\max_white.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+      </Resource>
       <None Remove="Assets\Images\min_white.png" />
-      <Content Include="Assets\Images\min_white.png">
+      <Resource Include="Assets\Images\min_white.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+      </Resource>
       <None Remove="Assets\Images\reload_white.png" />
-      <Content Include="Assets\Images\reload_white.png">
+      <Resource Include="Assets\Images\reload_white.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+      </Resource>
       <None Remove="Assets\Images\x_white.png" />
-      <Content Include="Assets\Images\x_white.png">
+      <Resource Include="Assets\Images\x_white.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+      </Resource>
     </ItemGroup>
 
 </Project>
