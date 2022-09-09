@@ -1,3 +1,6 @@
 frontend/obj/
 frontend/bin/
 frontend/.vs/
+backend/obj/
+backend/bin/
+backend/.vs/
