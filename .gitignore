@@ -4,4 +4,3 @@ backend/.vs
 frontend/bin
 frontend/obj
 frontend/.vs
-*.sln
