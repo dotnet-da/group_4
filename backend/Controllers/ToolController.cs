@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using backend.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -129,11 +130,60 @@ namespace backend.Controllers
             return BadRequest();
         }
 
-        [HttpPost]
-        [Route("player", Name = "create_player")]
-        public IActionResult CreatePlayer([FromQuery] string name)
+        [HttpDelete]
+        [Route("player", Name = "delete_player")]
+        public IActionResult GetPlayer(int? id, string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (!id.HasValue && string.IsNullOrEmpty(name))
+            {
+                var result = _context.Players;
+                return Ok(result);
+            }
+
+            if (id.HasValue)
+            {
+                try
+                {
+                    var result = _context.Players.FirstOrDefault(player => player.Id == id);
+                    if (result == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                try
+                {
+                    var result = _context.Players.FirstOrDefault(player => player.Name == name);
+                    if (result == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(result);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+
+            return BadRequest();
+        }*/
+        
+        [HttpDelete]
+        [Route("player", Name = "delete_player")]
+        public IActionResult DeletePlayer(int? id, string name)
+        {
+            if (!id.HasValue && string.IsNullOrEmpty(name))
             {
                 return BadRequest();
             }
@@ -144,13 +194,40 @@ namespace backend.Controllers
                 {
                     Name = name
                 };
-                _context.Players.Add(entity);
+                _context.Players.Get(entity);
                 _context.SaveChanges();
                 return CreatedAtRoute("get_player", new { id = entity.Id }, entity);
             }
             catch
             {
                 return BadRequest();
+            }
+        }
+        
+        [HttpPut]
+        [Route("player", Name = "update_player")]
+        public IActionResult UpdatePost(int? id, string name)
+        {
+            try
+            {
+                if (!id.HasValue)
+                {
+                    return BadRequest();
+                }
+                
+                if (string.IsNullOrEmpty(name))
+                {
+                    return BadRequest();
+                }
+                
+                var entity = _context.Players.Where(p => p.Id == id).First();
+                entity.Name = name;
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
