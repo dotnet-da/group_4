@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using backend.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -20,65 +21,6 @@ namespace backend.Controllers
         }
 
         #region Player
-
-        /*[HttpGet]
-        [Route("player")]
-        public IActionResult GetAllPlayers()
-        {
-            var result = _context.Players;
-            return Ok(result);
-            //return Ok(!result.Any() ? null : result);
-        }
-
-        [HttpGet]
-        [Route("player/{id:int}")]
-        public IActionResult GetPlayer(int id)
-        {
-            try
-            {
-                var result = _context.Players.FirstOrDefault(player => player.Id == id);
-                if (result == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(result);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-        
-        //[HttpGet]
-        //[Route("player/{name:string}")]
-        public IActionResult GetPlayer(string name)
-        {
-            try
-            {
-                var result = _context.Players.FirstOrDefault(player => player.Name == name);
-                if (result == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(result);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet(Name = "player")]
-        public IActionResult Get([FromQuery]int? id, [FromQuery]string name)
-        {
-            if (id.HasValue)
-            {
-                return GetPlayer(id.Value);
-            }
-            return string.IsNullOrEmpty(name) ? GetPlayer(name) : GetAllPlayers();
-        }*/
 
         [HttpGet]
         [Route("player", Name = "get_player")]
@@ -128,12 +70,12 @@ namespace backend.Controllers
 
             return BadRequest();
         }
-
+        
         [HttpPost]
         [Route("player", Name = "create_player")]
-        public IActionResult CreatePlayer([FromQuery] string name)
+        public IActionResult CreatePlayer(int? id, string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (!id.HasValue && string.IsNullOrEmpty(name))
             {
                 return BadRequest();
             }
@@ -153,37 +95,80 @@ namespace backend.Controllers
                 return BadRequest();
             }
         }
+        
+        [HttpDelete]
+        [Route("player", Name = "delete_player")]
+        public IActionResult DeletePlayer(int? id, string name)
+        {
+            if (!id.HasValue && string.IsNullOrEmpty(name))
+            {
+                return BadRequest();
+            }
+
+            if (id.HasValue)
+            {
+                try
+                {
+                    var result = _context.Players.FirstOrDefault(player => player.Id == id);
+                    if (result == null)
+                    {
+                        return NotFound();
+                    }
+
+                    _context.Players.Remove(result);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                try
+                {
+                    var result = _context.Players.FirstOrDefault(player => player.Name == name);
+                    if (result == null)
+                    {
+                        return NotFound();
+                    }
+
+                    _context.Players.Remove(result);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+            _context.SaveChanges();
+            return NoContent();
+        }
+        
+        [HttpPut]
+        [Route("player", Name = "update_player")]
+        public IActionResult UpdatePlayer(int? id, string name)
+        {
+            try
+            {
+                if (!id.HasValue)
+                {
+                    return BadRequest();
+                }
+
+                var entity = _context.Players.Where(p => p.Id == id).First();
+                entity.Name = !string.IsNullOrEmpty(name) ? name : entity.Name;
+                _context.SaveChanges();
+                return Ok(entity);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
 
         #endregion
 
         #region Type
-
-        /*[HttpGet]
-        [Route("type")]
-        public IActionResult GetAllTypes()
-        {
-            return Ok(_context.Types);
-        }
-
-        [HttpGet]
-        [Route("type/{id:int}")]
-        public IActionResult GetType(int id)
-        {
-            try
-            {
-                var result = _context.Types.FirstOrDefault(type => type.Id == id);
-                if (result == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(result);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }*/
 
         [HttpGet]
         [Route("type", Name = "get_type")]
@@ -259,83 +244,60 @@ namespace backend.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("type", Name = "delete_type")]
+        public IActionResult DeleteType(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var result = _context.Types.FirstOrDefault(type => type.Id == id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Types.Remove(result);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+            _context.SaveChanges();
+            return NoContent();
+        }
+        
+        [HttpPut]
+        [Route("type", Name = "update_type")]
+        public IActionResult UpdateType(int? id, string identifier, string description)
+        {
+            try
+            {
+                if (!id.HasValue)
+                {
+                    return BadRequest();
+                }
+                
+                var entity = _context.Types.Where(p => p.Id == id).First();
+                entity.Identifier = !string.IsNullOrEmpty(identifier) ? identifier : entity.Identifier;
+                entity.Description = !string.IsNullOrEmpty(description) ? description : entity.Description;
+                _context.SaveChanges();
+                return Ok(entity);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        
         #endregion
 
         #region Entry
-
-        /*[HttpGet]
-        [Route("entry")]
-        public IActionResult GetAllEntries()
-        {
-            return Ok(_context.Entries);
-        }
-
-        [HttpGet]
-        [Route("entry/{id:int}")]
-        public IActionResult GetEntryCollection(int id)
-        {
-            try
-            {
-                //var collection = _context.Entries.Where(entry => entry.Id == id);
-                //return Ok(collection);
-                return Ok();
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet]
-        [Route("entry/p/{id:int}")]
-        public IActionResult GetEntryCollectionsByPlayer(int id)
-        {
-            try
-            {
-                //var collection = _context.Entries.AsEnumerable().Where(entry => entry.PlayerId == id).GroupBy(entry => entry.Id);
-                //var collection = _context.Entries.Where(entry => entry.PlayerId == id).OrderBy(entry => entry.Id);
-                //return Ok(collection);
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-                return BadRequest();
-            }
-        }
-
-        [HttpGet]
-        [Route("entry/p/{id:int}/g")]
-        public IActionResult GetEntryCollectionsByPlayerGrouped(int id)
-        {
-            try
-            {
-                //var collection = _context.Entries.AsEnumerable().Where(entry => entry.PlayerId == id).OrderBy(entry => entry.Id).GroupBy(entry => entry.Id);
-                //var collection = _context.Entries.Where(entry => entry.PlayerId == id);
-                //return Ok(collection);
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-                return BadRequest();
-            }
-        }
-
-        [HttpGet]
-        [Route("entry/t/{id:int}")]
-        public IActionResult GetEntryCollectionsByType(int id)
-        {
-            try
-            {
-                var collection = _context.Entries.Where(entry => entry.TypeId == id);
-                return Ok(collection);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }*/
 
         [HttpGet]
         [Route("entry", Name = "get_entry")]
@@ -422,58 +384,61 @@ namespace backend.Controllers
                 return BadRequest();
             }
         }
-
-        #endregion
-
-        #region Collection
-
-        /*[HttpGet]
-        [Route("collection")]
-        public IActionResult GetAllCollections()
+        
+        [HttpDelete]
+        [Route("entry", Name = "delete_entry")]
+        public IActionResult DeleteEntry(int? cid)
         {
-            return Ok(_context.Collections);
-        }
+            if (!cid.HasValue)
+            {
+                return BadRequest();
+            }
 
-        [HttpGet]
-        [Route("collection/{id:int}")]
-        public IActionResult GetCollection(int id)
-        {
             try
             {
-                var result = _context.Collections.Where(c => c.Id == id).FirstOrDefault();
+                var result = _context.Entries.FirstOrDefault(type => type.CollectionId == cid);
                 if (result == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(result);
+                _context.Entries.Remove(result);
             }
             catch
             {
                 return BadRequest();
             }
-        }
 
-        [HttpGet]
-        [Route("collection/p/{id:int}")]
-        public IActionResult GetCollectionsByPlayer(int id)
+            _context.SaveChanges();
+            return NoContent();
+        }
+        
+        [HttpPut]
+        [Route("entry", Name = "update_entry")]
+        public IActionResult UpdateEntry(int? cid, int? tid, int? value)
         {
             try
             {
-                var result = _context.Collections.Where(c => c.PlayerId == id);
-                if (!result.Any())
+                if (!cid.HasValue)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
-
-                return Ok(result);
+                
+                var entity = _context.Entries.Where(p => p.CollectionId == cid).First();
+                entity.TypeId = !tid.HasValue ? tid.Value : entity.TypeId;
+                entity.Value = !value.HasValue ? value.Value : entity.Value;
+                _context.SaveChanges();
+                return Ok(entity);
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                Console.WriteLine(exception.Message);
-                return BadRequest();
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
-        }*/
+        }
+
+        #endregion
+
+        #region Collection
 
         [HttpGet]
         [Route("collection", Name = "get_collection")]
@@ -539,6 +504,56 @@ namespace backend.Controllers
             catch
             {
                 return BadRequest();
+            }
+        }
+        
+        [HttpDelete]
+        [Route("collection", Name = "delete_collection")]
+        public IActionResult DeleteCollection(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var result = _context.Collections.FirstOrDefault(type => type.Id == id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Collections.Remove(result);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+            _context.SaveChanges();
+            return NoContent();
+        }
+        
+        [HttpPut]
+        [Route("collection", Name = "update_collection")]
+        public IActionResult UpdateCollection(int? id, int? pid)
+        {
+            try
+            {
+                if (!id.HasValue)
+                {
+                    return BadRequest();
+                }
+                
+                var entity = _context.Collections.Where(p => p.Id == id).First();
+                entity.PlayerId = !pid.HasValue ? pid.Value : entity.PlayerId;
+                _context.SaveChanges();
+                return Ok(entity);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
