@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace WpfApp4.Core;
+namespace frontend.Core;
 
 public class Command : ICommand
 {
-    readonly Action<object> _auszufuehrenderCode;
-    readonly Predicate<object> _istAusfuehrbar;
+    readonly Action<object> _executableCode;
+    readonly Predicate<object> _isExecutable;
 
-    public Command(Action<object> auszufuehrenderCode) : this(auszufuehrenderCode, null)
+    public Command(Action<object> executableCode) : this(executableCode, null)
     {
     }
 
-    public Command(Action<object> auszufuehrenderCode, Predicate<object> istAusfuehrbar)
+    public Command(Action<object> executableCode, Predicate<object> isExecutable)
     {
-        _auszufuehrenderCode = auszufuehrenderCode;
-        _istAusfuehrbar = istAusfuehrbar;
+        _executableCode = executableCode;
+        _isExecutable = isExecutable;
     }
 
     public bool CanExecute(object? parameters)
     {
-        return _istAusfuehrbar(parameters!);
+        return _isExecutable == null ? true : _isExecutable(parameters);
     }
 
     public event EventHandler? CanExecuteChanged
@@ -31,6 +31,6 @@ public class Command : ICommand
 
     public void Execute(object? parameters)
     {
-        _auszufuehrenderCode(parameters!);
+        _executableCode(parameters!);
     }
 }

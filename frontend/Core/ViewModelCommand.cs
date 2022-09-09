@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace frontend.MVVM.ViewModel;
+namespace frontend.Core;
 
 public class ViewModelCommand : ICommand
 {

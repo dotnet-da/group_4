@@ -1,12 +1,7 @@
-﻿using frontend.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using WpfApp4.Core;
-using static frontend.MVVM.Model.ToolModel;
+using frontend.Core;
 
 namespace frontend.MVVM.ViewModel
 {

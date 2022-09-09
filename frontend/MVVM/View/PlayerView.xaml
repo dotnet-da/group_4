@@ -35,7 +35,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Orientation="Horizontal" FlowDirection="RightToLeft">
-                <Button Style="{StaticResource ModernPlusButton}" />
+                <Button Style="{StaticResource ModernPlusButton}" Command="{Binding OpenAddPlayerCommand}" />
             </StackPanel>
         </Grid>
         <ScrollViewer>
@@ -68,7 +68,6 @@
 
                             <TextBlock Grid.Row="0" Grid.Column="1"
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Right"
                                        FontFamily="/Assets/Fonts/#Kodchasan"
                                        FontSize="12"
                                        Foreground="{StaticResource Gray}"
@@ -76,7 +75,6 @@
 
                             <TextBlock Grid.Row="1" Grid.Column="1"
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Right"
                                        FontFamily="/Assets/Fonts/#Kodchasan"
                                        FontSize="28"
                                        Foreground="{StaticResource Orange}"

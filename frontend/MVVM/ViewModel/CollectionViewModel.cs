@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using frontend.Core;
 
 namespace frontend.MVVM.ViewModel
 {
@@ -14,7 +15,7 @@ namespace frontend.MVVM.ViewModel
 
         public CollectionViewModel()
         {
-            OpenAddCollectionCommand = new ViewModelCommand(
+            OpenAddCollectionCommand = new Command(
                 _ =>
                 {
                     var addCollection = new AddCollectionView();

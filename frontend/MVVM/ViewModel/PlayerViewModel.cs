@@ -1,20 +1,16 @@
-﻿using frontend.MVVM.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using frontend.Core;
+using frontend.MVVM.View;
 
 namespace frontend.MVVM.ViewModel
 {
-    internal class PlayerViewModel : ViewModelBase
+    internal class PlayerViewModel : ObservableObject
     {
         public ICommand OpenAddPlayerCommand { get; set; }
 
         public PlayerViewModel()
         {
-            OpenAddPlayerCommand = new ViewModelCommand(
+            OpenAddPlayerCommand = new Command(
                 _ =>
                 {
                     var addPlayer = new AddPlayerView();
