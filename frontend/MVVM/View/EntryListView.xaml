@@ -24,24 +24,21 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    
-    <Grid Background="{StaticResource DarkGray}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="100*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Button x:Name="Button" Grid.Column="3" Grid.ColumnSpan="1" Command="{Binding OpenAddEntry}" Grid.Row="1" Content="+"/>
-        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top"
+              Background="{StaticResource BlackGray}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button Style="{StaticResource ModernPlusButton}" />
+            </StackPanel>
+        </Grid>
+        <ScrollViewer>
             <ItemsControl Name="ItemsControl">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -55,42 +52,42 @@
                                 <RowDefinition Height="2*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            
+
                             <TextBlock Grid.Row="0" Grid.Column="0"
-                                VerticalAlignment="Center"
-                                FontFamily="/Assets/Fonts/#Kodchasan"
-                                FontSize="12"
-                                Foreground="{StaticResource Gray}"
-                                Text="CID" />
-                            
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="12"
+                                       Foreground="{StaticResource Gray}"
+                                       Text="CID" />
+
                             <TextBlock Grid.Row="1" Grid.Column="0"
                                        VerticalAlignment="Center"
                                        FontFamily="/Assets/Fonts/#Kodchasan"
                                        FontSize="28"
                                        Foreground="{StaticResource Orange}"
                                        Text="{Binding CollectionId}" />
-                            
+
                             <TextBlock Grid.Row="0" Grid.Column="1"
                                        VerticalAlignment="Center"
                                        FontFamily="/Assets/Fonts/#Kodchasan"
                                        FontSize="12"
                                        Foreground="{StaticResource Gray}"
                                        Text="TID" />
-                            
+
                             <TextBlock Grid.Row="1" Grid.Column="1"
                                        VerticalAlignment="Center"
                                        FontFamily="/Assets/Fonts/#Kodchasan"
                                        FontSize="28"
                                        Foreground="{StaticResource Orange}"
                                        Text="{Binding TypeId}" />
-                            
+
                             <TextBlock Grid.Row="0" Grid.Column="2"
                                        VerticalAlignment="Center"
                                        FontFamily="/Assets/Fonts/#Kodchasan"
                                        FontSize="12"
                                        Foreground="{StaticResource Gray}"
                                        Text="Value" />
-                            
+
                             <TextBlock Grid.Row="1" Grid.Column="2"
                                        VerticalAlignment="Center"
                                        FontFamily="/Assets/Fonts/#Kodchasan"
@@ -102,5 +99,5 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-    </Grid>
+    </DockPanel>
 </UserControl>
