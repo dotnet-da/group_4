@@ -40,13 +40,14 @@
             <RowDefinition Height="100*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!--<Button x:Name="BtnAddType" Grid.Column="3" Grid.ColumnSpan="1" Command="{Binding OpenAddCollectionCommand}" Grid.Row="1" Content="+"/>-->
+        <Button x:Name="Button" Grid.Column="3" Grid.ColumnSpan="1" Command="{Binding OpenAddEntry}" Grid.Row="1" Content="+"/>
         <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
             <ItemsControl Name="ItemsControl">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="15, 5, 5, 5">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
@@ -58,9 +59,44 @@
                             <TextBlock Grid.Row="0" Grid.Column="0"
                                 VerticalAlignment="Center"
                                 FontFamily="/Assets/Fonts/#Kodchasan"
-                                FontSize="28"
-                                Foreground="{StaticResource Orange}"
-                                Text="{Binding CollectionId}" />
+                                FontSize="12"
+                                Foreground="{StaticResource Gray}"
+                                Text="CID" />
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="28"
+                                       Foreground="{StaticResource Orange}"
+                                       Text="{Binding CollectionId}" />
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="12"
+                                       Foreground="{StaticResource Gray}"
+                                       Text="TID" />
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="28"
+                                       Foreground="{StaticResource Orange}"
+                                       Text="{Binding TypeId}" />
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="12"
+                                       Foreground="{StaticResource Gray}"
+                                       Text="Value" />
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="28"
+                                       Foreground="{StaticResource Orange}"
+                                       Text="{Binding Value}" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
