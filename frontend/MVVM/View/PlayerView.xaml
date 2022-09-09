@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="frontend.MVVM.View.PlayerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:frontend.MVVM.View"
+             xmlns:viewmodel="clr-namespace:frontend.MVVM.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="Gray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="BtnAddPlayer" Grid.Column="3" Grid.ColumnSpan="1" Command="{Binding OpenAddPlayerCommand}" Grid.Row="1" Content="+"/>
+        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+            <ItemsControl Name="ItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="15, 5, 5, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontFamily="/Assets/Fonts/#Kodchasan"
+                                            FontSize="28"
+                                            Text="{Binding Id}" />
+                            <TextBlock Grid.Column="1" TextAlignment="Right"
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="/Assets/Fonts/#Kodchasan"
+                                                   FontSize="16"
+                                                   Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+    
+</UserControl>
