@@ -16,11 +16,11 @@
         <DataTemplate x:Name="PlayerViewTemplate" DataType="{x:Type viewmodels:PlayerViewModel}">
             <views:PlayerView DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="View2Template" DataType="{x:Type viewmodels:View2ViewModel}">
-            <views:View2 DataContext="{Binding}"/>
-        </DataTemplate>
         <DataTemplate x:Name="TypeViewTemplate" DataType="{x:Type viewmodels:ToolTypeViewModel}">
             <views:ToolTypeView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="CollectionViewTemplate" DataType="{x:Type viewmodels:CollectionViewModel}">
+            <views:CollectionView DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
     
@@ -42,7 +42,8 @@
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Background="Gray">
             <StackPanel>
                 <Button x:Name="btnView1" Content="Player" Click="Button_Click"/>
-                <Button x:Name="btnType" Content="Type" Click="btnType_Click"/>
+                <Button x:Name="btnType" Content="Categorys" Click="btnType_Click"/>
+                <Button x:Name="btnCollection" Content="Collection" Click="btnCollection_Click" />
             </StackPanel>
         </DockPanel>
 

@@ -27,5 +27,11 @@ namespace frontend
             var viewModel = new ToolTypeViewModel();
             DataContext = viewModel;
         }
+
+        private void btnCollection_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = new CollectionViewModel();
+            DataContext = viewModel;
+        }
     }
 }
