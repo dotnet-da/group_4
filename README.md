@@ -22,3 +22,6 @@ The API has CRUD operations for every table on the database. As mentioned earlie
 
 ## The Frontend
 Our Frontend is a WPF Application which can perform CRUD operations on the database via the API. It allows us to add new players, types, collections and entries, while also giving us an overview of our existing objects and datasets.
+
+##Installation
+For the Installation you just need to pull the git repository and run the Solution.sln after building the fronted you can just run it from the bin/Debug/ folder.
