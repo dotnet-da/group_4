@@ -22,3 +22,4 @@ The API has CRUD operations for every table on the database. As mentioned earlie
 
 ## The Frontend
 Our Frontend is a WPF Application which can perform CRUD operations on the database via the API. It allows us to add new players, types, collections and entries, while also giving us an overview of our existing objects and datasets.
+We used the MVVM pattern (https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) for our Windows and Views inside of the WPF. This makes the code easy to test and easy to change the view later for different UIs or platforms. The WPF UI elements are accessed via Databinding.
