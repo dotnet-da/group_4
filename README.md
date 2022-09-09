@@ -1,5 +1,9 @@
 # C# & .NET Framework Group 4
 
+### Contributors
+- Oktay Bekar
+- Patrick Geertz
+
 <!-- ABOUT THE PROJECT -->
 ## The Project
 Our goal was to create a simple Windows Application that lets you track statistics about anything. Doesn't matter if its about a video game, a sport or an every day task, every statistical category can be created by the user. Multiple different statistics can be grouped together by a collection.
@@ -12,3 +16,9 @@ Our Database and API are both hosted on a virtual server (VPS) and is accessible
 ### Database Structure
 
 ![er_diagram](https://user-images.githubusercontent.com/31593666/189299145-aebd0d6b-67fa-49c9-b612-21ea0a6e6019.png)
+
+### API Structure
+The API has CRUD operations for every table on the database. As mentioned earlier, every HTTP request needs a API-Access-Key in the header, to provide security and safety. The API is accessible everywhere from this address: http://h073.de
+
+## The Frontend
+Our Frontend is a WPF Application which can perform CRUD operations on the database via the API. It allows us to add new players, types, collections and entries, while also giving us an overview of our existing objects and datasets.
