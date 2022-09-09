@@ -7,4 +7,23 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="Assets\Images\max_white.png" />
+      <Content Include="Assets\Images\max_white.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Assets\Images\min_white.png" />
+      <Content Include="Assets\Images\min_white.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Assets\Images\reload_white.png" />
+      <Content Include="Assets\Images\reload_white.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Assets\Images\x_white.png" />
+      <Content Include="Assets\Images\x_white.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

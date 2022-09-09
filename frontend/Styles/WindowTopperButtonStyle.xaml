@@ -1,0 +1,213 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <ResourceDictionary.Source>Colours.xaml</ResourceDictionary.Source>
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Style 
+        TargetType="{x:Type Button}"
+        x:Key="ModernCloseButton">
+        <Style.Setters>
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid
+                            Margin="5">
+                            <Ellipse
+                                Fill="{TemplateBinding Background}"
+                                Width="15"
+                                Height="15"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter
+                Property="Background"
+                Value="{StaticResource AccentRed}"/>
+        </Style.Setters>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type Button}"
+        x:Key="ModernMinimiseButton">
+        <Style.Setters>
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid
+                            Margin="5">
+                            <Ellipse
+                                Fill="{TemplateBinding Background}"
+                                Width="15"
+                                Height="15"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter
+                Property="Background"
+                Value="{StaticResource AccentOrange}"/>
+        </Style.Setters>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type Button}"
+        x:Key="ModernMaximiseButton">
+        <Style.Setters>
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid
+                            Margin="5">
+                            <Ellipse
+                                Fill="{TemplateBinding Background}"
+                                Width="15"
+                                Height="15"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter
+                Property="Background"
+                Value="{StaticResource AccentGreen}"/>
+        </Style.Setters>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type Button}"
+        x:Key="ModernWindowsCloseButton">
+        <Style.Setters>
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid
+                            Background="{TemplateBinding Background}">
+                            <Image
+                                Margin="5"
+                                Source="/Assets/Images/x_white.png">
+                            </Image>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter
+                Property="Background"
+                Value="Transparent"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger
+                Property="IsMouseOver"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource AccentRed}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type Button}"
+        x:Key="ModernWindowsMaximiseButton">
+        <Style.Setters>
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid
+                            Background="{TemplateBinding Background}">
+                            <Image
+                                Margin="5"
+                                Source="/Assets/Images/max_white.png">
+                            </Image>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter
+                Property="Background"
+                Value="Transparent"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger
+                Property="IsMouseOver"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource Gray}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type Button}"
+        x:Key="ModernWindowsMinimiseButton">
+        <Style.Setters>
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid
+                            Background="{TemplateBinding Background}">
+                            <Image
+                                Margin="5"
+                                Source="/Assets/Images/min_white.png">
+                            </Image>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter
+                Property="Background"
+                Value="Transparent"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger
+                Property="IsMouseOver"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource Gray}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type Button}"
+        x:Key="ModernWindowsReloadButton">
+        <Style.Setters>
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid
+                            Background="{TemplateBinding Background}">
+                            <Image
+                                Margin="5"
+                                Source="/Assets/Images/reload_white.png">
+                            </Image>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter
+                Property="Background"
+                Value="Transparent"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger
+                Property="IsMouseOver"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource Gray}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+</ResourceDictionary>

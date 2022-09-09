@@ -1,0 +1,141 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <ResourceDictionary.Source>Colours.xaml</ResourceDictionary.Source>
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Style 
+        TargetType="{x:Type DataGrid}"
+        x:Key="ModernDataGrid">
+        <Style.Setters>
+            <Setter
+                Property="ColumnHeaderStyle"
+                Value="{DynamicResource ModernDataGridColumnHeaderStyle}" />
+            <Setter
+                Property="RowStyle"
+                Value="{DynamicResource ModernDataGridRowStyle}" />
+            <Setter
+                Property="CellStyle"
+                Value="{DynamicResource ModernDataGridCellStyle}" />
+            <Setter
+                Property="RowHeaderStyle"
+                Value="{DynamicResource ModernDataGridRowHeaderStyle}" />
+            <Setter
+                Property="BorderThickness"
+                Value="0" />
+            <Setter
+                Property="Background"
+                Value="{StaticResource DarkGray}" />
+        </Style.Setters>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type DataGridColumnHeader}"
+        x:Key="ModernDataGridColumnHeaderStyle">
+        <Style.Setters>
+            <Setter
+                Property="Background"
+                Value="{StaticResource BlackGray}" />
+            <Setter
+                Property="Foreground"
+                Value="{StaticResource White}" />
+            <Setter
+                Property="BorderThickness"
+                Value="0" />
+        </Style.Setters>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type DataGridRowHeader}"
+        x:Key="ModernDataGridRowHeaderStyle">
+        <Style.Setters>
+            <Setter
+                Property="Background"
+                Value="{StaticResource BlackGray}" />
+            <Setter
+                Property="Foreground"
+                Value="{StaticResource White}" />
+            <Setter
+                Property="BorderThickness"
+                Value="0" />
+        </Style.Setters>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type DataGridRow}"
+        x:Key="ModernDataGridRowStyle">
+        <Style.Setters>
+            <Setter
+                Property="Background"
+                Value="{StaticResource DarkGray}" />
+            <Setter
+                Property="Foreground"
+                Value="{StaticResource White}" />
+            <Setter
+                Property="BorderThickness"
+                Value="0" />
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger
+                Property="IsMouseOver"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource White}" />
+                <Setter
+                    Property="Foreground"
+                    Value="{StaticResource DarkGray}" />
+            </Trigger>
+            <Trigger
+                Property="IsSelected"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource AccentOrange}" />
+                <Setter
+                    Property="Foreground"
+                    Value="{StaticResource DarkGray}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style 
+        TargetType="{x:Type DataGridCell}"
+        x:Key="ModernDataGridCellStyle">
+        <Style.Setters>
+            <Setter
+                Property="Background"
+                Value="{StaticResource DarkGray}" />
+            <Setter
+                Property="Foreground"
+                Value="{StaticResource White}" />
+            <Setter
+                Property="BorderThickness"
+                Value="0" />
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger
+                Property="IsMouseOver"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource White}" />
+                <Setter
+                    Property="Foreground"
+                    Value="{StaticResource DarkGray}" />
+            </Trigger>
+            <Trigger
+                Property="IsSelected"
+                Value="True">
+                <Setter
+                    Property="Background"
+                    Value="{StaticResource AccentOrange}" />
+                <Setter
+                    Property="Foreground"
+                    Value="{StaticResource DarkGray}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
