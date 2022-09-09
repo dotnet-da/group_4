@@ -154,16 +154,11 @@ namespace backend.Controllers
                 {
                     return BadRequest();
                 }
-                
-                if (string.IsNullOrEmpty(name))
-                {
-                    return BadRequest();
-                }
-                
+
                 var entity = _context.Players.Where(p => p.Id == id).First();
-                entity.Name = name;
+                entity.Name = !string.IsNullOrEmpty(name) ? name : entity.Name;
                 _context.SaveChanges();
-                return Ok();
+                return Ok(entity);
             }
             catch (Exception e)
             {
