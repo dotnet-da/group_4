@@ -26,4 +26,11 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Assets\Images\plus_white.png" />
+      <Content Include="Assets\Images\plus_white.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

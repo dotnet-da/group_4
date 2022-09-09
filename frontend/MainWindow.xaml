@@ -46,8 +46,6 @@
             </ResourceDictionary.MergedDictionaries>
            
         </ResourceDictionary>
-       
-       
     </Window.Resources>
     
     <Border Name="BackgroundLayer" Background="{StaticResource DarkGray}" CornerRadius="0">
