@@ -11,4 +11,4 @@ Now you can create new **Collection** referencing the Player and containing the 
 Our Database and API are both hosted on a virtual server (VPS) and is accessible from everywhere. To access the API you need to provide a API-Access-Key. This protects us from outside attacks and grants, that only people with the allowed rights can alter the data on the database via the API.
 ### Database Structure
 
-![ER-Diagram](img/er_diagram.png)
+![er_diagram](https://user-images.githubusercontent.com/31593666/189299145-aebd0d6b-67fa-49c9-b612-21ea0a6e6019.png)
