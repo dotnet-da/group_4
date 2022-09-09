@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using frontend.Core;
 
 namespace frontend.MVVM.ViewModel
 {
@@ -14,7 +15,7 @@ namespace frontend.MVVM.ViewModel
 
         public ToolTypeViewModel()
         {
-            OpenAddTypeCommand = new ViewModelCommand(
+            OpenAddTypeCommand = new Command(
                 _ =>
                 {
                     var addType = new AddType();

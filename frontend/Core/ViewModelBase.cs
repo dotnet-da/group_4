@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace frontend.MVVM.ViewModel;
+namespace frontend.Core;
 
 public abstract class ViewModelBase : INotifyPropertyChanged
 {

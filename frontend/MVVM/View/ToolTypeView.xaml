@@ -6,22 +6,40 @@
              xmlns:local="clr-namespace:frontend.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Gray">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="100*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Button x:Name="BtnAddType" Grid.Column="3" Grid.ColumnSpan="1" Command="{Binding OpenAddTypeCommand}" Grid.Row="1" Content="+"/>
-        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+     
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <ResourceDictionary.Source>../../Styles/Colours.xaml</ResourceDictionary.Source>
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <ResourceDictionary.Source>../../Styles/MenuButtonStyle.xaml</ResourceDictionary.Source>
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <ResourceDictionary.Source>../../Styles/WindowTopperButtonStyle.xaml</ResourceDictionary.Source>
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <ResourceDictionary.Source>../../Styles/GridStyle.xaml</ResourceDictionary.Source>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <DockPanel>
+        <Grid DockPanel.Dock="Top"
+              Background="{StaticResource BlackGray}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button Style="{StaticResource ModernPlusButton}" Command="{Binding OpenAddTypeCommand}"/>
+            </StackPanel>
+        </Grid>
+        <ScrollViewer>
             <ItemsControl Name="ItemsControl">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -29,25 +47,58 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <TextBlock
-                                            VerticalAlignment="Center"
-                                            FontFamily="/Assets/Fonts/#Kodchasan"
-                                            FontSize="28"
-                                            Text="{Binding Id}" />
-                            <TextBlock Grid.Column="1" TextAlignment="Right"
-                                                   VerticalAlignment="Center"
-                                                   FontFamily="/Assets/Fonts/#Kodchasan"
-                                                   FontSize="16"
-                                                   Text="{Binding Identifier}" />
+
+                            <TextBlock Grid.Row="0" Grid.Column="0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="12"
+                                       Foreground="{StaticResource Gray}"
+                                       Text="ID" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="28"
+                                       Foreground="{StaticResource Orange}"
+                                       Text="{Binding Id}" />
+
+                            <TextBlock Grid.Row="0" Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="12"
+                                       Foreground="{StaticResource Gray}"
+                                       Text="Title" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="28"
+                                       Foreground="{StaticResource Orange}"
+                                       Text="{Binding Identifier}" />
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="12"
+                                       Foreground="{StaticResource Gray}"
+                                       Text="Description" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       FontFamily="/Assets/Fonts/#Kodchasan"
+                                       FontSize="28"
+                                       Foreground="{StaticResource Orange}"
+                                       Text="{Binding Description}" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-    </Grid>
+    </DockPanel>
 </UserControl>

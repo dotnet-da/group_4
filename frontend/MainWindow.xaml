@@ -12,23 +12,19 @@
         AllowsTransparency="True"
         Background="Transparent"
         WindowStyle="None">
-    <Window.DataContext>
-        <viewmodels:MainViewModel/>
-    </Window.DataContext>
-    
     <Window.Resources>
         <ResourceDictionary>
             <DataTemplate x:Name="PlayerViewTemplate" DataType="{x:Type viewmodels:PlayerViewModel}">
-                <views:PlayerView DataContext="{Binding}"/>
+                <views:PlayerView DataContext="{Binding}" />
             </DataTemplate>
             <DataTemplate x:Name="TypeViewTemplate" DataType="{x:Type viewmodels:ToolTypeViewModel}">
-                <views:ToolTypeView DataContext="{Binding}"/>
+                <views:ToolTypeView DataContext="{Binding}" />
             </DataTemplate>
             <DataTemplate x:Name="CollectionViewTemplate" DataType="{x:Type viewmodels:CollectionViewModel}">
-                <views:CollectionView DataContext="{Binding}"/>
+                <views:CollectionView DataContext="{Binding}" />
             </DataTemplate>
             <DataTemplate x:Name="EntryListViewTemplate" DataType="{x:Type viewmodels:EntryListViewModel}">
-                <views:EntryListView DataContext="{Binding}"/>
+                <views:EntryListView DataContext="{Binding}" />
             </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
@@ -44,10 +40,10 @@
                     <ResourceDictionary.Source>Styles/GridStyle.xaml</ResourceDictionary.Source>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-           
+
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Border Name="BackgroundLayer" Background="{StaticResource DarkGray}" CornerRadius="0">
         <DockPanel>
             <Grid DockPanel.Dock="Top"
@@ -60,14 +56,14 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
+
                 <StackPanel Grid.Column="1" Orientation="Horizontal" FlowDirection="RightToLeft">
                     <Button Click="Close_OnClick" Style="{StaticResource ModernWindowsCloseButton}" />
                     <Button Click="Maximise_OnClick" Style="{StaticResource ModernWindowsMaximiseButton}" />
                     <Button Click="Minimise_OnClick" Style="{StaticResource ModernWindowsMinimiseButton}" />
                 </StackPanel>
             </Grid>
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="128" />
@@ -89,7 +85,7 @@
                     HorizontalAlignment="Left"
                     Margin="10, 5, 5, 5">
                 </TextBlock>
-                
+
                 <StackPanel
                     Grid.Column="0"
                     Grid.Row="1">
@@ -116,11 +112,12 @@
                         Click="EntryViewMenuItem_OnClick">
                     </RadioButton>
                 </StackPanel>
-                    <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="4" Name="ContentControl" Content="{Binding}" />
-                    
+                <ContentControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Name="ContentControl"
+                                Content="{Binding}" />
+
             </Grid>
         </DockPanel>
     </Border>
-    
-    
+
+
 </Window>
